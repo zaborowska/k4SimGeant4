@@ -11,7 +11,7 @@
  *  @author Anna Zaborowska
  */
 
-class ISimG4RegionTool : virtual public IAlgTool {
+struct ISimG4RegionTool : extend_interfaces<IAlgTool> {
 public:
   DeclareInterfaceID(ISimG4RegionTool, 1, 0);
 
