@@ -1,5 +1,5 @@
-#ifndef SIMG4FAST_SIMG4FASTSIMDEFINEMESHREGION_H
-#define SIMG4FAST_SIMG4FASTSIMDEFINEMESHREGION_H
+#ifndef SIMG4FAST_SIMG4DEFINEMESHREGION_H
+#define SIMG4FAST_SIMG4DEFINEMESHREGION_H
 
 // Gaudi
 #include "GaudiAlg/GaudiTool.h"
@@ -14,8 +14,8 @@
 class G4VFastSimulationModel;
 class G4Region;
 
-/** @class SimG4FastSimDefineMeshRegion SimG4Fast/src/components/SimG4FastSimDefineMeshRegion.h
- * SimG4FastSimDefineMeshRegion.h
+/** @class SimG4DefineMeshRegion SimG4Fast/src/components/SimG4DefineMeshRegion.h
+ * SimG4DefineMeshRegion.h
  *
  *  Tool for creating regions for fast simulation, attaching GFlashModel to them.
  *  Regions are created for volumes specified in the job options (\b'volumeNames').
@@ -25,10 +25,10 @@ class G4Region;
  *  @author Anna Zaborowska
 */
 
-class SimG4FastSimDefineMeshRegion : public GaudiTool, virtual public ISimG4RegionTool {
+class SimG4DefineMeshRegion : public GaudiTool, virtual public ISimG4RegionTool {
 public:
-  explicit SimG4FastSimDefineMeshRegion(const std::string& type, const std::string& name, const IInterface* parent);
-  virtual ~SimG4FastSimDefineMeshRegion();
+  explicit SimG4DefineMeshRegion(const std::string& type, const std::string& name, const IInterface* parent);
+  virtual ~SimG4DefineMeshRegion();
   /**  Initialize.
    *   @return status code
    */
@@ -66,4 +66,4 @@ private:
                                          "threshold below which the electrons (positrons) are killed"};
 };
 
-#endif /* SIMG4FAST_SIMG4FASTSIMDEFINEMESHREGION_H */
+#endif /* SIMG4FAST_SIMG4DEFINEMESHREGION_H */

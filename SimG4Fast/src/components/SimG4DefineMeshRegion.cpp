@@ -1,4 +1,4 @@
-#include "SimG4FastSimDefineMeshRegion.h"
+#include "SimG4DefineMeshRegion.h"
 
 // Geant4
 #include "G4Electron.hh"
@@ -10,15 +10,17 @@
 
 #include "G4NistManager.hh"
 
-DECLARE_COMPONENT(SimG4FastSimDefineMeshRegion)
+DECLARE_COMPONENT(SimG4DefineMeshRegion)
 
-SimG4FastSimDefineMeshRegion::SimG4FastSimDefineMeshRegion(const std::string& type, const std::string& name,
+SimG4DefineMeshRegion::SimG4DefineMeshRegion(const std::string& type, const std::string& name,
                                                              const IInterface* parent)
-    : GaudiTool(type, name, parent) {}
+    : GaudiTool(type, name, parent) {
+  declareInterface<ISimG4RegionTool>(this);
+}
 
-SimG4FastSimDefineMeshRegion::~SimG4FastSimDefineMeshRegion() {}
+SimG4DefineMeshRegion::~SimG4DefineMeshRegion() {}
 
-StatusCode SimG4FastSimDefineMeshRegion::initialize() {
+StatusCode SimG4DefineMeshRegion::initialize() {
   if (GaudiTool::initialize().isFailure()) {
     return StatusCode::FAILURE;
   }
@@ -33,9 +35,9 @@ StatusCode SimG4FastSimDefineMeshRegion::initialize() {
   return StatusCode::SUCCESS;
 }
 
-StatusCode SimG4FastSimDefineMeshRegion::finalize() { return GaudiTool::finalize(); }
+StatusCode SimG4DefineMeshRegion::finalize() { return GaudiTool::finalize(); }
 
-StatusCode SimG4FastSimDefineMeshRegion::create() {
+StatusCode SimG4DefineMeshRegion::create() {
   G4LogicalVolume* world =
       (*G4TransportationManager::GetTransportationManager()->GetWorldsIterator())->GetLogicalVolume();
   for (const auto& calorimeterName : m_volumeNames) {
