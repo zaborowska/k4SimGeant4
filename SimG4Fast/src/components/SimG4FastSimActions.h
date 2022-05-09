@@ -31,6 +31,10 @@ public:
    *  @return pointer to G4VUserActionInitialization (ownership is transferred to the caller)
    */
   virtual G4VUserActionInitialization* userActionInitialization() final;
+private:
+    /// Name of the output file with histograms and cell energy deposits
+  Gaudi::Property<std::string> m_outputName{this, "outName", "DefineMeshOutput.root",
+      "Name of the output file"};
 };
 
 #endif /* SIMG4FAST_G4FASTSIMACTIONS_H */

@@ -33,6 +33,13 @@ public:
    *  @param aSeg Segmentation of the detector (used to retrieve the cell ID)
    */
   FastSimCalorimeterSD(const std::string& aDetectorName,
+                      const std::string& aReadoutName);
+  /** Constructor.
+   *  @param aDetectorName Name of the detector
+   *  @param aReadoutName Name of the readout (used to name the collection)
+   *  @param aSeg Segmentation of the detector (used to retrieve the cell ID)
+   */
+  FastSimCalorimeterSD(const std::string& aDetectorName,
                       const std::string& aReadoutName,
                       const dd4hep::Segmentation& aSeg);
   /// Destructor
@@ -62,9 +69,9 @@ private:
   /// Segmentation of the detector used to retrieve the cell Ids
   dd4hep::Segmentation m_seg;
   /// Number of mesh readout cells in cylindrical coordinates
-  G4ThreeVector fMeshNbOfCells = { 18, 50, 48 };
+  G4ThreeVector fMeshNbOfCells = { 18, 50, 45 };
   /// Size of mesh readout cells in cylindrical coordinates.
-  G4ThreeVector fMeshSizeOfCells = { 2.325 * mm, 2 * CLHEP::pi / 50., 3.4 * mm };
+  G4ThreeVector fMeshSizeOfCells = { 4.8975 * mm, 2 * CLHEP::pi / 50., 5.05 * mm };
   /// Retrieved once per event: position of entering particle
   G4ThreeVector fEntrancePosition = { 0, -1, -1 };
   /// Retrieved once per event: direction of entering particle

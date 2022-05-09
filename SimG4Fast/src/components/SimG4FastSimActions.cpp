@@ -21,4 +21,4 @@ StatusCode SimG4FastSimActions::initialize() {
 
 StatusCode SimG4FastSimActions::finalize() { return AlgTool::finalize(); }
 
-G4VUserActionInitialization* SimG4FastSimActions::userActionInitialization() { return new sim::FastSimActions(); }
+G4VUserActionInitialization* SimG4FastSimActions::userActionInitialization() { return new sim::FastSimActions(m_outputName); }

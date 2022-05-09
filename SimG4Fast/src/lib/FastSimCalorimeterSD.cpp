@@ -26,6 +26,12 @@ FastSimCalorimeterSD::FastSimCalorimeterSD(const std::string& aDetectorName,
   // name of the collection of hits is determined byt the readout name (from XML)
   collectionName.insert(aReadoutName);
 }
+FastSimCalorimeterSD::FastSimCalorimeterSD(const std::string& aDetectorName,
+                                         const std::string& aReadoutName)
+    : G4VSensitiveDetector(aDetectorName), m_calorimeterCollection(nullptr), m_seg() {
+  // name of the collection of hits is determined byt the readout name (from XML)
+  collectionName.insert(aReadoutName);
+}
 
 FastSimCalorimeterSD::~FastSimCalorimeterSD() {}
 
@@ -47,13 +53,12 @@ void FastSimCalorimeterSD::Initialize(G4HCofThisEvent* aHitsCollections) {
   // reset entrance position
   fEntrancePosition.set(-1, -1, -1);
   fEntranceDirection.set(-1, -1, -1);
-
 }
 
 bool FastSimCalorimeterSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
   // check if energy was deposited
   G4double edep = aStep->GetTotalEnergyDeposit();
-  if (edep == 0.) return false;
+ if (edep == 0.) return false;
 
   auto hit = RetrieveAndSetupHit(aStep->GetPostStepPoint()->GetPosition());
   if(hit == nullptr)

@@ -32,6 +32,7 @@ class Par04RunAction : public G4UserRunAction
  public:
   /// Constructor. Defines the histograms.
   Par04RunAction(Par04EventAction* aEventAction);
+  Par04RunAction(Par04EventAction* aEventAction, const std::string& aOutputName);
   virtual ~Par04RunAction();
 
   /// Open the file for the analysis
@@ -42,6 +43,8 @@ class Par04RunAction : public G4UserRunAction
  private:
   /// Pointer to event action to save hits
   Par04EventAction* fEventAction;
+  /// Name of the output file
+  std::string m_outputName = "defineMeshOutput.root";
 };
 }
 #endif /* PAR04RUNACTION_HH */

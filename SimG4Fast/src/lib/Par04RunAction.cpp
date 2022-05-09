@@ -15,8 +15,18 @@ Par04RunAction::Par04RunAction(Par04EventAction* aEventAction)
   G4RootAnalysisManager* analysisManager = G4RootAnalysisManager::Instance();
 //  analysisManager->SetDefaultFileType("root");
 
-  // Default filename, can be overriden with /analysis/setFileName
-  analysisManager->SetFileName("Par04Output");
+  analysisManager->SetFileName(m_outputName);
+}
+Par04RunAction::Par04RunAction(Par04EventAction* aEventAction, const std::string& aOutputName)
+  : G4UserRunAction()
+  , fEventAction(aEventAction)
+  , m_outputName(aOutputName)
+{
+  // Create analysis manager
+  G4RootAnalysisManager* analysisManager = G4RootAnalysisManager::Instance();
+//  analysisManager->SetDefaultFileType("root");
+
+  analysisManager->SetFileName(m_outputName);
 }
 
 Par04RunAction::~Par04RunAction() {}
@@ -30,13 +40,13 @@ void Par04RunAction::BeginOfRunAction(const G4Run*)
   analysisManager->SetNtupleMerging(true);
   analysisManager->SetVerboseLevel(0);
 
-  // Get detector dimensions TODO: CHANGE< NOT HARDOCODED
-  G4int cellNumZ       = 45;//fDetector->GetMeshNbOfCells().z();
-  G4int cellNumRho     = 18;//fDetector->GetMeshNbOfCells().x();
-  G4int cellNumPhi     = 50;//fDetector->GetMeshNbOfCells().y();
-  G4double cellSizeZ   = 3.4;//fDetector->GetMeshSizeOfCells().z();
-  G4double cellSizeRho = 2.325;//fDetector->GetMeshSizeOfCells().x();
-  G4double cellSizePhi = 2*CLHEP::pi/cellNumPhi;//fDetector->GetMeshSizeOfCells().y();
+  // Get detector dimensions
+  G4int cellNumZ       = fEventAction->GetMeshCellNbZ();
+  G4int cellNumRho     = fEventAction->GetMeshCellNbRho();
+  G4int cellNumPhi     = fEventAction->GetMeshCellNbPhi();
+  G4double cellSizeZ   = fEventAction->GetMeshCellSizeZ();
+  G4double cellSizeRho = fEventAction->GetMeshCellSizeRho();
+  G4double cellSizePhi = fEventAction->GetMeshCellSizePhi();
   // Default max value of energy stored in histogram (in GeV)
   G4double maxEnergy = 1000;
 

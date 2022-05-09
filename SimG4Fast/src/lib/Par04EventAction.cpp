@@ -49,7 +49,7 @@ void Par04EventAction::EndOfEventAction(const G4Event* aEvent)
   // Get hits collection ID (only once)
   if(fHitCollectionID == -1)
   {
-    fHitCollectionID = G4SDManager::GetSDMpointer()->GetCollectionID("hits");
+    fHitCollectionID = G4SDManager::GetSDMpointer()->GetCollectionID("ECalBarrelCollection");
   }
   // Get hits collection
   auto hitsCollection =
@@ -82,12 +82,12 @@ void Par04EventAction::EndOfEventAction(const G4Event* aEvent)
     G4EventManager::GetEventManager()->GetConstCurrentEvent()->GetPrimaryVertex();
   auto primaryParticle   = primaryVertex->GetPrimary(0);
   G4double primaryEnergy = primaryParticle->GetTotalEnergy();
+
   // Estimate from vertex and particle direction the entry point to the detector
   // Calculate entrance point to the detector located at z = 0
   auto primaryDirection = primaryParticle->GetMomentumDirection();
   auto primaryEntrance =
     primaryVertex->GetPosition() - primaryVertex->GetPosition().z() * primaryDirection;
-
   // Resize back to initial mesh size
   fCalEdep.resize(fCellNbRho * fCellNbPhi * fCellNbZ);
   fCalRho.resize(fCellNbRho * fCellNbPhi * fCellNbZ);

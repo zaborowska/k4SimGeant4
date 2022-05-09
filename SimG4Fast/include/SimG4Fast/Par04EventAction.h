@@ -32,6 +32,12 @@ class Par04EventAction : public G4UserEventAction
   inline std::vector<G4int>& GetCalRho() { return fCalRho; }
   inline std::vector<G4int>& GetCalPhi() { return fCalPhi; }
   inline std::vector<G4int>& GetCalZ() { return fCalZ; }
+  inline G4int GetMeshCellNbZ() const {return fCellNbZ;}
+  inline G4int GetMeshCellNbRho() const {return fCellNbRho;}
+  inline G4int GetMeshCellNbPhi() const {return fCellNbPhi;}
+  inline G4double GetMeshCellSizeZ() const {return fCellSizeZ;}
+  inline G4double GetMeshCellSizeRho() const {return fCellSizeRho;}
+  inline G4double GetMeshCellSizePhi() const {return fCellSizePhi;}
 
  private:
   /// ID of a hit collection to analyse
@@ -39,9 +45,9 @@ class Par04EventAction : public G4UserEventAction
   /// Timer measurement
   G4Timer fTimer;
   /// Size of cell along Z axis
-  G4double fCellSizeZ = 3.4;
+  G4double fCellSizeZ = 5.05;
   /// Size of cell along radius of cylinder
-  G4double fCellSizeRho = 2.325;
+  G4double fCellSizeRho = 4.8975;
   /// Size of cell in azimuthal angle
   G4double fCellSizePhi = 2*CLHEP::pi/50.;
   /// Number of readout cells along radius

@@ -5,11 +5,13 @@
 namespace sim {
 FastSimActions::FastSimActions() : G4VUserActionInitialization() {}
 
+FastSimActions::FastSimActions(std::string aOutputName) : G4VUserActionInitialization(), m_outputName(aOutputName) {}
+
 FastSimActions::~FastSimActions() {}
 
 void FastSimActions::Build() const {
    auto eventAction = new Par04EventAction();
    SetUserAction(eventAction);
-   SetUserAction(new Par04RunAction(eventAction));
+   SetUserAction(new Par04RunAction(eventAction, m_outputName));
 }
 }
