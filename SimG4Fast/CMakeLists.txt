@@ -6,7 +6,11 @@
 file(GLOB _lib_sources src/lib/*.cpp)
 gaudi_add_library(SimG4Fast
                  SOURCES ${_lib_sources}
-                 LINK Gaudi::GaudiAlgLib k4FWCore::k4FWCore SimG4Common EDM4HEP::edm4hep DD4hep::DDCore SimG4Interface)
+                 LINK Gaudi::GaudiAlgLib k4FWCore::k4FWCore SimG4Common DD4hep::DDCore SimG4Interface)
+
+file(GLOB headers include/SimG4Fast/*.h)
+set_target_properties(SimG4Fast PROPERTIES PUBLIC_HEADER "${headers}")
+dd4hep_generate_rootmap(SimG4Fast)
 
 
 file(GLOB _module_sources src/components/*.cpp)
