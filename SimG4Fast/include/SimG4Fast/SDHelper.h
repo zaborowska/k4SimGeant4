@@ -21,7 +21,7 @@ namespace det
 /// It is invoked from ProcessHits() methods, and sets basic hit properties
 /// (position, etc.), common for hit from fast and full simulation.
   k4::Geant4CaloHit* RetrieveAndSetupHit(G4THitsCollection<k4::Geant4CaloHit>* aHitsCollection, G4ThreeVector aPosition,
-                              G4ThreeVector aEntrancePosition, G4ThreeVector aEntranceDirection,
+                              G4ThreeVector& aEntrancePosition, G4ThreeVector& aEntranceDirection,
                               G4ThreeVector aMeshSizeOfCells, G4ThreeVector aMeshNbOfCells);
 };
 

@@ -10,6 +10,7 @@
 // Geant
 #include "G4THitsCollection.hh"
 #include "G4VSensitiveDetector.hh"
+#include "G4SystemOfUnits.hh"
 
 namespace k4 {
 class Geant4CaloHit;
@@ -58,7 +59,7 @@ private:
   /// Collection of calorimeter hits
   G4THitsCollection<k4::Geant4CaloHit>* m_calorimeterCollection;
   /// Number of mesh readout cells in cylindrical coordinates
-  G4ThreeVector fMeshNbOfCells = { 3, 4, 5 };
+  G4ThreeVector fMeshNbOfCells = { 18, 50, 48 };
   /// Size of mesh readout cells in cylindrical coordinates.
   G4ThreeVector fMeshSizeOfCells = { 4.5 * mm , 2 * CLHEP::pi / 50., 5.05*mm };
   /// Retrieved once per event: position of entering particle

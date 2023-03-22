@@ -1,13 +1,27 @@
 #include "SimG4Fast/SDHelper.h"
+#include "SimG4Fast/MeshEventInformation.h"
+
 #include "G4ThreeVector.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4RotationMatrix.hh"
+#include "G4EventManager.hh"
+#include "G4Event.hh"
 
 namespace det {
 k4::Geant4CaloHit* RetrieveAndSetupHit(G4THitsCollection<k4::Geant4CaloHit>* aHitsCollection, G4ThreeVector aPosition,
-                              G4ThreeVector aEntrancePosition, G4ThreeVector aEntranceDirection,
+                              G4ThreeVector& aEntrancePosition, G4ThreeVector& aEntranceDirection,
                               G4ThreeVector aMeshSizeOfCells, G4ThreeVector aMeshNbOfCells)
 {
+  if(aEntrancePosition.x() == -1)
+  {
+    sim::MeshEventInformation* info = dynamic_cast<sim::MeshEventInformation*>(
+      G4EventManager::GetEventManager()->GetConstCurrentEvent()->GetUserInformation());
+    if(info == nullptr)
+      return nullptr;
+    aEntrancePosition  = info->GetPosition();
+    aEntranceDirection = info->GetDirection();
+  }
+
   auto delta = aPosition - aEntrancePosition;
 
   // Calculate rotation matrix along the particle momentum direction
